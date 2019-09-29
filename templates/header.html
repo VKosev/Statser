@@ -1,0 +1,50 @@
+{{define "header"}}
+<body>
+  <header class="bg-inverse container-fluid text-white">
+      <div class="row">
+          <div id="logo-nav" class="col-sm-8">
+            <div class="row">
+              <h1 class="col-sm-12 font-weight-bold ml-3 mt-3">Project Statser</h1>
+              <p class="text-primary font-weight-bold mt-1" style="margin-left: 2em;">Historical data of English Premier League championship for the past 7 years.</p>
+            </div>
+              <div class="row pt-4">
+                <nav class="navbar navbar-toggleable navbar-light bg-inverse py-0 px-0 m">
+                  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav mr-auto">
+                      <li style="border-right: 1px solid white" class="nav-item btn-outline-primary"><a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a></li>
+                      <li style="border-right: 1px solid white" class="nav-item  btn-outline-primary"><a class="nav-link text-white" href="/">Head To Head <span class="sr-only">(current)</span></a></li>
+                      <li class="nav-item  btn-outline-primary"><a class="nav-link text-white" href="#">EPL Seasonal Data <span class="sr-only">(current)</span></a></li>
+                    </ul>
+                </div>
+                </nav>
+              </div>
+          </div>
+          {{if.Username}}
+            <div class="col-sm-3 offset-sm-1">
+              <h4 class="ml-5 mt-3 mr-3 float-right col-sm-12" style="text-align:right;">logged in as <i>{{.Username}}</i></h4>
+              <form method="post" action="/logout">
+                <button class="btn btn-primary float-right mr-3">logout</button>
+              </form>
+            </div>
+          {{else}}
+          <div id="login-form" class="col-sm-3 offset-sm-1">
+              <form class="mr-3" action="/login" method="post">
+                  <div class="form-group mb-0">
+                      <label class="pt-1 mb-0" for="username">Username</label>
+                      <input type="text" class="form-control form-control-sm" id="username" name="username">
+                  </div>
+                  <div class="form-group mb-1">
+                      <label class="pt-1 mb-0" for="Password">Password</label>
+                      <input type="password" class="form-control form-control-sm" id="password" name="password">
+                  </div>
+                  {{if.LoginError}} <p class="mb-0" style="color:red;">{{.LoginError}}</p>{{end}}
+                  <button type="submit" class="btn btn-primary col-sm-5 btn-sm float-right ml-2">login</button>
+                  <button type="button" class="btn btn-primary col-sm-5 btn-sm float-right" onclick="location.href = '/register'">register</button>  
+              </form>
+          </div>
+          {{end}}
+  </header>
+{{end}}
